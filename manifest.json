@@ -2,7 +2,4 @@
   "name": "PIXLY GAMES",
   "url": "https://github.com/pixlygames/tonconnect-app",
   "iconUrl": "https://raw.githubusercontent.com/pixlygames/tonconnect-app/main/favicon.jpg",
-  "manifestUrl": "https://raw.githubusercontent.com/pixlygames/tonconnect-app/main/manifest.json",
-  "dappVersion": "1.0",
-  "permissions": ["tonAddress", "tonPublicKey"]
 }
