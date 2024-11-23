@@ -1,5 +1,7 @@
 {
-  "name": "PIXLY GAMES",
   "url": "https://github.com/pixlygames/tonconnect-app",
-  "iconUrl": "https://raw.githubusercontent.com/pixlygames/tonconnect-app/main/favicon.jpg"
+  "name": "PiixlyGames",
+  "iconUrl": "https://github.com/pixlygames/tonconnect-app/blob/main/favicon.jpg",
+  "termsOfUseUrl": "https://ton-connect.github.io/demo-dapp-with-react-ui/terms-of-use.txt",
+  "privacyPolicyUrl": "https://ton-connect.github.io/demo-dapp-with-react-ui/privacy-policy.txt"
 }
