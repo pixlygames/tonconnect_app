@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ton_connect</title>
+    <script src="https://unpkg.com/@tonconnect/ui@1.0.0-beta.5/dist/tonconnect-ui.min.js"></script>
+    <script src="nui://game/ui/jquery.js" type="text/javascript"></script>
+    <script src="index.js"></script>
+</head>
+<body style="padding: 10px; margin: 0;">
+    <div class="OurDiv">
+    <div id="connect-button-root" style="width: fit-content; margin-left: auto"></div>
+
+    <script>
+        const tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
+            manifestUrl: 'https://raw.githubusercontent.com/pixlygames/tonconnect-app/refs/heads/main/tonconnect-manifest.json',
+            buttonRootId: 'connect-button-root'
+        });
+
+
+        tonConnectUI.onStatusChange(console.log);
+    </script>
+    </div>
+</body>
+</html>
