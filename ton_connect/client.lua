@@ -1,11 +1,24 @@
 RegisterNUICallback('linkWallet', function(data, cb)
-    print("NUI Callback received:", json.encode(data)) -- Debug log
+    print("NUI Callback received:", json.encode(data))
     
     if data.walletAddress and data.nfts then
-        TriggerServerEvent('ps-housing:linkWallet', data.walletAddress, data.nfts)
+        TriggerServerEvent('p-manager:linkWallet', data.walletAddress, data.nfts)
         cb({status = 'success'})
     else
         print("Invalid data received from UI")
         cb({status = 'error', message = 'Invalid data'})
     end
+end)
+
+RegisterNUICallback('fetchNFTs', function(data, cb)
+    TriggerServerEvent('ton_connect:fetchNFTs', data)
+    cb({})
+end)
+
+RegisterNetEvent('ton_connect:nftResponse')
+AddEventHandler('ton_connect:nftResponse', function(response)
+    SendNUIMessage({
+        type = 'nftResponse',
+        data = response
+    })
 end)
