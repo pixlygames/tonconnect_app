@@ -6,12 +6,6 @@ ui_page 'index.html'
 files { 
     'index.html', 
     'index.js',
-    'styles.css'
-}
-
-shared_scripts {
-    'config.lua',
-    'nfts_to_assets.lua'
 }
 
 client_scripts {
