@@ -28,35 +28,40 @@
             tonConnectUI.onStatusChange(async (wallet) => {
                 if (wallet) {
                     const walletAddress = wallet.account.address;
-                    
-                    // Send wallet address to server to fetch NFTs
-                    $.post('https://ton_connect/fetchNFTs', JSON.stringify({
-                        walletAddress: walletAddress
-                    })).done(function(nftInfo) {
-                        if (nftInfo && nftInfo.success) {
-                            displayNFTs(nftInfo.nfts);
-                            
-                            // Link wallet and NFTs
-                            $.post('https://ton_connect/linkWallet', JSON.stringify({
-                                walletAddress: walletAddress,
-                                nfts: nftInfo.nfts
-                            })).done(function(response) {
-                                console.log('Wallet linked successfully:', response);
-                            }).fail(function(error) {
-                                console.error('Error linking wallet:', error);
-                            });
-                        } else {
-                            console.error('Error fetching NFTs:', nftInfo.error);
-                            document.getElementById('nft-info').innerHTML = '<p>Error fetching NFTs. Please try again.</p>';
-                        }
+                    const nftInfo = await fetchNFTs(walletAddress);
+                    displayNFTs(nftInfo);
+
+                    console.log('Sending to FiveM:', { walletAddress, nfts: nftInfo }); // Debug log
+
+                    $.post('https://ton_connect/linkWallet', JSON.stringify({
+                        walletAddress: walletAddress,
+                        nfts: nftInfo
+                    })).done(function(response) {
+                        console.log('Response from FiveM:', response);
                     }).fail(function(error) {
-                        console.error('Error fetching NFTs:', error);
-                        document.getElementById('nft-info').innerHTML = '<p>Error fetching NFTs. Please try again.</p>';
+                        console.error('Error sending data to FiveM:', error);
                     });
-                } else {
-                    document.getElementById('nft-info').innerHTML = '';
                 }
             });
+
+            async function fetchNFTs(walletAddress) {
+                const apiUrl = `https://tonapi.io/v2/accounts/${walletAddress}/nfts`;
+                const apiKey = 'AFN7E2R55RST5RYAAAABJNF44ZYE27WQRTA4AEZYDONFEYAAIXEZMZSG44HU62HN2JN4RGQ'; // Replace with your TON API key
+
+                try {
+                    const response = await fetch(apiUrl, {
+                        headers: {
+                            'Authorization': `Bearer ${apiKey}`
+                        }
+                    });
+                    const data = await response.json();
+                    console.log('API Response:', data);
+                    return data.nft_items || [];
+                } catch (error) {
+                    console.error('Error fetching NFTs:', error);
+                    return [];
+                }
+            }
 
             function displayNFTs(nftItems) {
                 const nftInfoDiv = document.getElementById('nft-info');
