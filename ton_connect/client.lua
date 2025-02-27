@@ -9,16 +9,3 @@ RegisterNUICallback('linkWallet', function(data, cb)
         cb({status = 'error', message = 'Invalid data'})
     end
 end)
-
-RegisterNUICallback('fetchNFTs', function(data, cb)
-    TriggerServerEvent('ton_connect:fetchNFTs', data)
-    cb({})
-end)
-
-RegisterNetEvent('ton_connect:nftResponse')
-AddEventHandler('ton_connect:nftResponse', function(response)
-    SendNUIMessage({
-        type = 'nftResponse',
-        data = response
-    })
-end)
