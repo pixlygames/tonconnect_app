@@ -1,6 +1,8 @@
 fx_version 'cerulean'
 games { 'gta5' }
 
+author 'Pixly Games'
+
 ui_page 'index.html'
 
 files { 
