@@ -1,3 +1,5 @@
+-- NOT PRODUCTION VERSION ONLY FOR TEST
+
 local QBCore = exports['qb-core']:GetCoreObject()
 
 CreateThread(function()
